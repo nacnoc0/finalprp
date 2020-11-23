@@ -1,0 +1,141 @@
+﻿<!doctype html>
+<html lang="en">
+
+<!-- 
+        Author: Jesus Gonzalez
+-->       
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, intiial-scale=1">
+    <title>Matchmaker Web</title>
+</head>  
+<body>
+    <h1>Mathcmaker Web</h1>
+    <p>Answer each question using the drop down tabs.</p>
+
+    <label>apple is better than android</label><br>
+    <select id="q1">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br><br>
+
+    <label>pineapple on pizza</label><br>
+    <select id="q2">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br><br>
+
+    <label>2020 is the best year</label><br>
+    <select id="q3">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br><br>
+
+    <label>dogs are better than cats</label><br>
+    <select id="q4">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br><br>
+
+    <label>computers are cool</label><br>
+    <select id="q5">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br><br>
+
+
+        <button onclick="calculateCompatibility()">Calculate Compatbility</button>
+        <P id="compatibility"></P>
+        
+        <script>
+
+        function calculateCompatibility() {
+
+            const DESIRED_RESPONSE = 
+            [
+            // 1 is strongly disagree, 5 is strongly agree
+            3, 
+            1, 
+            1, 
+            3, 
+            5
+            ]
+
+            const MAX_SCORE = 25;
+
+            //Get Values for the dropdown
+            let question1Response = document.getElementById("q1").selectedOptions[0].value;
+            let question2Response = document.getElementById("q2").selectedOptions[0].value;
+            let question3Response = document.getElementById("q3").selectedOptions[0].value;
+            let question4Response = document.getElementById("q4").selectedOptions[0].value;
+            let question5Response = document.getElementById("q5").selectedOptions[0].value;
+
+
+            //Calculate Compatibility
+            let question1compatibily = 5 -Math.abs(question1Response - DESIRED_RESPONSE[0]);
+            let question2compatibily = 5 -Math.abs(question2Response - DESIRED_RESPONSE[1]);
+            let question3compatibily = 5 -Math.abs(question3Response - DESIRED_RESPONSE[2]);
+            let question4compatibily = 5 -Math.abs(question4Response - DESIRED_RESPONSE[3]);
+            let question5compatibily = 5 -Math.abs(question5Response - DESIRED_RESPONSE[4]);
+
+
+            //Total Compatibility
+            let totalCompatibility = question1compatibily + question2compatibily + question3compatibily + question4compatibily + question5compatibily;
+
+            //Converting Compatibility to Percent
+            totalCompatibility *= 100 / MAX_SCORE;
+            totalCompatibility = Math.round(totalCompatibility);
+
+
+            if (totalCompatibility>90){
+                compat="just found my soulmate"
+            }
+            else if (totalCompatibility>75){
+                compat="we should hangout sometime"
+            }
+            else{
+                compat="please leave"
+            }
+
+            document.getElementById("compatibility").innerHTML= "Your Compatibility is..."+ totalCompatibility+ "% ... "+compat;
+
+            }
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+        </body>
+        </html>
