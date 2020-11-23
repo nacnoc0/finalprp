@@ -1,9 +1,8 @@
 ﻿<!doctype html>
 <html lang="en">
 
-<!-- 
-        Author: Jesus Gonzalez
--->       
+   <!-- Author: Jesus Gonzalez -->
+       
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, intiial-scale=1">
     <title>Matchmaker Web</title>
@@ -62,7 +61,6 @@
     </select>
     <br><br>
 
-
         <button onclick="calculateCompatibility()">Calculate Compatbility</button>
         <P id="compatibility"></P>
         
@@ -79,9 +77,8 @@
             3, 
             5
             ]
-
-            const MAX_SCORE = 25;
-
+            const weight=[2,4,2,2,10]// weight of each question
+            
             //Get Values for the dropdown
             let question1Response = document.getElementById("q1").selectedOptions[0].value;
             let question2Response = document.getElementById("q2").selectedOptions[0].value;
@@ -89,23 +86,17 @@
             let question4Response = document.getElementById("q4").selectedOptions[0].value;
             let question5Response = document.getElementById("q5").selectedOptions[0].value;
 
-
             //Calculate Compatibility
-            let question1compatibily = 5 -Math.abs(question1Response - DESIRED_RESPONSE[0]);
-            let question2compatibily = 5 -Math.abs(question2Response - DESIRED_RESPONSE[1]);
-            let question3compatibily = 5 -Math.abs(question3Response - DESIRED_RESPONSE[2]);
-            let question4compatibily = 5 -Math.abs(question4Response - DESIRED_RESPONSE[3]);
-            let question5compatibily = 5 -Math.abs(question5Response - DESIRED_RESPONSE[4]);
-
+            let question1compatibily = (5 -Math.abs(question1Response - DESIRED_RESPONSE[0]))*weight[0];
+            let question2compatibily = (5 -Math.abs(question2Response - DESIRED_RESPONSE[1]))*weight[1];
+            let question3compatibily = (5 -Math.abs(question3Response - DESIRED_RESPONSE[2]))*weight[2];
+            let question4compatibily = (5 -Math.abs(question4Response - DESIRED_RESPONSE[3]))*weight[3];
+            let question5compatibily = (5 -Math.abs(question5Response - DESIRED_RESPONSE[4]))*weight[4];
 
             //Total Compatibility
             let totalCompatibility = question1compatibily + question2compatibily + question3compatibily + question4compatibily + question5compatibily;
 
-            //Converting Compatibility to Percent
-            totalCompatibility *= 100 / MAX_SCORE;
-            totalCompatibility = Math.round(totalCompatibility);
-
-
+            //determine message to show the user
             if (totalCompatibility>90){
                 compat="just found my soulmate"
             }
@@ -115,26 +106,8 @@
             else{
                 compat="please leave"
             }
-
             document.getElementById("compatibility").innerHTML= "Your Compatibility is..."+ totalCompatibility+ "% ... "+compat;
-
             }
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </script>
         </body>
